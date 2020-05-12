@@ -77,7 +77,7 @@ function setup() {
   frameRate(30)
 
   textAlign(CENTER,CENTER)
-  textFont(myFont)
+  //textFont(myFont)
   textSize(30)
 
   shipImg.loadPixels()
