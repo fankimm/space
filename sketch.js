@@ -35,7 +35,7 @@ var logo
 var skipFrames
 
 function preload(){
-  myFont = loadFont('assets/pixel.ttf')
+  //myFont = loadFont('assets/pixel.ttf')
   bg = loadSound('assets/spaceRefmp3.mp3')
 
   logo = loadImage('assets/logo.png')
