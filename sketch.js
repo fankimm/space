@@ -1,4 +1,3 @@
-var myTrue
 
 var rScale
 var mW
@@ -11,11 +10,9 @@ var stars = []
 
 let ship
 let earth
-
 let panty
 let gtr
 
-let drunkenSoju
 let shipImg
 let earthImg
 let sojuImg
@@ -50,8 +47,6 @@ function preload(){
 
 function setup() {
 
-  myTrue = true
-
   isDrink = false
 
   skipFrames = 3
@@ -62,11 +57,12 @@ function setup() {
   mW = 1200
   mH = 800
 
-  ship = new Ship("soon2", 0, mH/2, 1, 0, shipImg, 0)
-
-  // soju = new Soju("soju", mW + sojuImg.width, mH/2, -1, 0, sojuImg, 5)
-  soju = new Soju("soju", 100, mH/2, -1, 0, sojuImg, 0)
-
+  ship = new Ship("soon2", 100, mH/2, 1, 0, shipImg, 0)
+  panty = new Obj("CK",mW + 50, mH/4, -3, 0, pantyImg, 2)
+  soju = new Soju("soju", mW + 50, mH/2, -1, 0, sojuImg, 7)
+  // soju = new Soju("soju", 300, mH/2, -1, 0, sojuImg, 0)
+  gtr = new Obj("SangMyeon",mW + 50, 600,-1,0,gtrImg,0)
+  earth = new Obj("EARTH", 100, mH/2, 0, 0, earthImg, 0)
   for (var i = 0; i<starAmount; i++){
     stars[i] = new Stars()
   }
@@ -87,7 +83,7 @@ function setup() {
   fill(255)
   frameRate(30)
 
-  textAlign(CENTER,CENTER)
+  textAlign(CENTER)
   textFont(myFont)
   textSize(30)
 
@@ -95,11 +91,9 @@ function setup() {
 
   bg.play()
 
-
-
-
-
 }
+
+
 
 function draw() {
 
@@ -110,17 +104,22 @@ function draw() {
     stars[i].update()
   }
 
+  earth.draw()
+
   ship.draw()
-
-
-
-
   ship.update()
   ship.move()
 
-  soju.update()
+  panty.draw()
+  panty.update()
+
   soju.draw()
+  soju.update()
   soju.drinkSoju(ship)
+
+  gtr.draw()
+  gtr.update()
+
 
 
 
@@ -167,7 +166,6 @@ function Stars(){
   }
 }
 
-
 class Obj{
   constructor (name, x, y, vX, vY, img, t){
     this.isDraw = true
@@ -180,8 +178,10 @@ class Obj{
 
   update (){
     if(time>this.cT){
+      this.vel.y = sin(frameCount/10)
       this.pos.x += this.vel.x
       this.pos.y -= this.vel.y
+
     }
   }
 
@@ -192,12 +192,38 @@ class Obj{
 
       textSize(20)
       fill(255)
-      text(this.name, this.pos.x,this.pos.y+this.img.width/2)
+
+      text(this.name, this.pos.x,this.pos.y+this.img.height/2*rScale+rScale*2)
 
     }
   }
 
 }
+/*
+class Stars{
+  constructor (name, x, y, vX, vY, img, t){
+    this.random = random(120)
+    this.color = random(120)
+  }
+  update(){
+    if(this.pos.x < 0){
+      this.pos = createVector(mW,random(mH))
+    }
+
+    this.color = color(this.random+(sin(frameCount/6))*60)
+    // console.log((sin(frameCount/6)+1)*60)
+
+    if(frameCount%skipFrames == 0){
+
+      this.pos.x -= 3
+
+    }
+  }
+  draw(){
+    fill(this.color)
+    rect(this.pos.x, this.pos.y, rScale/2, rScale/2)
+  }
+}*/
 
 
 class Ship extends Obj{
@@ -205,38 +231,31 @@ class Ship extends Obj{
     super(name, x, y, vX, vY, img, t)
     this.isDrink = false
   }
+
   draw(){
     if(!this.isDrink){
       super.draw()
     } else {
       push()
+      // translate(this.pos.x + this.img.width*rScale/2,this.pos.y + this.img.height*rScale/2)
       translate(this.pos.x,this.pos.y)
       rotate(frameCount/10)
-      /*
-      this.img.pixels[0] = 255
-      this.img.pixels[1] = 0
-      this.img.pixels[2] = 0
-      this.img.pixels[3] = 255
-      this.img.updatePixels()
-      */
-      // image(this.img,0,0,this.img.width*rScale,this.img.height*rScale)
-
       tint(random(255),random(255),random(255),200)
       image(this.img,0,0,this.img.width*rScale,this.img.height*rScale)
       textSize(20)
       fill(255)
-      text(this.name,0,this.img.width/2)
-      pop()
+      text(this.name, 0,this.img.height*rScale/2 + rScale*2)
 
+      pop()
     }
   }
+
   move(){
     this.vel.y = sin(frameCount/10)
     if(this.pos.x>mW/2){
       this.vel.x = 0
     }
   }
-
 
 }
 
@@ -246,22 +265,13 @@ class Soju extends Obj{
   }
 
   drinkSoju(a){
-    if((this.pos.x - this.img.width/2 - a.pos.x - a.img.width/2)<=0){
+    // console.log(this.pos.x + " , " + a.pos.x+this.img.width)
+    console.log(a.img.width)
+    if((this.pos.x - a.pos.x - a.img.width*rScale)<=0){
       this.isDraw = false
       a.isDrink = true
       score = 10000
     }
   }
 
-}
-
-function myConsole(){
-  if(myTrue){
-    loadPixels()
-    for(var i=0;i<pixels.length;i++)
-    {
-        console.log(i+'='+pixels[i])
-    }
-    myTrue = false
-  }
 }
