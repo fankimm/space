@@ -1,4 +1,4 @@
-
+var myTrue
 
 var rScale
 var mW
@@ -15,6 +15,7 @@ let earth
 let panty
 let gtr
 
+let drunkenSoju
 let shipImg
 let earthImg
 let sojuImg
@@ -27,16 +28,15 @@ let starAmount
 var score
 var time
 
-var isDrink
 
-var bg
+let bg
 var logo
 
 var skipFrames
 
 function preload(){
-  //myFont = loadFont('assets/pixel.ttf')
-  bg = loadSound('assets/spaceRefmp3.mp3')
+  myFont = loadFont('assets/pixel.ttf')
+  bg = loadSound('assets/bg.mp3')
 
   logo = loadImage('assets/logo.png')
 
@@ -50,26 +50,37 @@ function preload(){
 
 function setup() {
 
+  myTrue = true
 
   isDrink = false
-  bg.play()
+
   skipFrames = 3
   starAmount = 30
   score = 0
   time = 0
 
-  mW = 1000
-  mH = 1000
+  mW = 1200
+  mH = 800
 
   ship = new Ship("soon2", 0, mH/2, 1, 0, shipImg, 0)
-  soju = new Soju("soju", mW + sojuImg.width, mH/2, -1, 0, sojuImg, 5)
+
+  // soju = new Soju("soju", mW + sojuImg.width, mH/2, -1, 0, sojuImg, 5)
+  soju = new Soju("soju", 100, mH/2, -1, 0, sojuImg, 0)
+
   for (var i = 0; i<starAmount; i++){
     stars[i] = new Stars()
   }
 
-  rScale = 10
+  rScale = 8
+  // createCanvas(mW,mH)
 
-  createCanvas(mW,mH)
+  let canvasElement = createCanvas(mW,mH).elt
+  let context = canvasElement.getContext('2d')
+  context.mozImageSmoothingEnabled = false
+  context.webkitImageSmoothingEnabled = false
+  context.msImageSmoothingEnabled = false
+  context.imageSmoothingEnabled = false
+
   noStroke()
   imageMode(CENTER)
 
@@ -77,17 +88,20 @@ function setup() {
   frameRate(30)
 
   textAlign(CENTER,CENTER)
-  //textFont(myFont)
+  textFont(myFont)
   textSize(30)
 
-  shipImg.loadPixels()
-  showPx()
+  bg.loop()
+
+  bg.play()
+
+
+
+
 
 }
 
 function draw() {
-
-
 
   background(0)
 
@@ -96,16 +110,17 @@ function draw() {
     stars[i].update()
   }
 
+  ship.draw()
+
+
+
 
   ship.update()
-  ship.draw()
   ship.move()
-
-  showPx()
 
   soju.update()
   soju.draw()
-  soju.drinkSoju()
+  soju.drinkSoju(ship)
 
 
 
@@ -118,12 +133,14 @@ function draw() {
     time++
 
   }
+
 }
 
 
 
 function Stars(){
   // this.pos = createVector(0,0)
+
   this.pos = createVector(random(mW),random(mH))
   this.random = random(120)
   this.color = color(0)
@@ -146,17 +163,10 @@ function Stars(){
     // this.pos = createVector(random(mW),random(mH))
 
     fill(this.color)
-    rect(this.pos.x, this.pos.y, rScale, rScale)
+    rect(this.pos.x, this.pos.y, rScale/2, rScale/2)
   }
 }
 
-function showPx(){
-  for (var i=0; i<shipImg.pixels.length;i++){
-    // console.log(shipImg.pixels[i*10])
-    shipImg.pixels[i] = 125
-
-  }
-}
 
 class Obj{
   constructor (name, x, y, vX, vY, img, t){
@@ -173,32 +183,60 @@ class Obj{
       this.pos.x += this.vel.x
       this.pos.y -= this.vel.y
     }
-
   }
 
   draw (){
     if(this.isDraw){
-      image(this.img, this.pos.x, this.pos.y)
+
+      image(this.img, this.pos.x, this.pos.y,this.img.width*rScale,this.img.height*rScale)
+
       textSize(20)
+      fill(255)
       text(this.name, this.pos.x,this.pos.y+this.img.width/2)
+
     }
   }
 
-
-
 }
+
 
 class Ship extends Obj{
   constructor (name, x, y, vX, vY, img, t){
     super(name, x, y, vX, vY, img, t)
+    this.isDrink = false
   }
+  draw(){
+    if(!this.isDrink){
+      super.draw()
+    } else {
+      push()
+      translate(this.pos.x,this.pos.y)
+      rotate(frameCount/10)
+      /*
+      this.img.pixels[0] = 255
+      this.img.pixels[1] = 0
+      this.img.pixels[2] = 0
+      this.img.pixels[3] = 255
+      this.img.updatePixels()
+      */
+      // image(this.img,0,0,this.img.width*rScale,this.img.height*rScale)
 
+      tint(random(255),random(255),random(255),200)
+      image(this.img,0,0,this.img.width*rScale,this.img.height*rScale)
+      textSize(20)
+      fill(255)
+      text(this.name,0,this.img.width/2)
+      pop()
+
+    }
+  }
   move(){
     this.vel.y = sin(frameCount/10)
     if(this.pos.x>mW/2){
       this.vel.x = 0
     }
   }
+
 
 }
 
@@ -207,11 +245,23 @@ class Soju extends Obj{
     super(name, x, y, vX, vY, img, t)
   }
 
-  drinkSoju(){
-    if((this.pos.x - ship.pos.x)<0){
+  drinkSoju(a){
+    if((this.pos.x - this.img.width/2 - a.pos.x - a.img.width/2)<=0){
       this.isDraw = false
+      a.isDrink = true
       score = 10000
     }
   }
 
+}
+
+function myConsole(){
+  if(myTrue){
+    loadPixels()
+    for(var i=0;i<pixels.length;i++)
+    {
+        console.log(i+'='+pixels[i])
+    }
+    myTrue = false
+  }
 }
