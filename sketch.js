@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-var gittest
-var gittest2
-=======
->>>>>>> 0489b2761e02d795653d3be633806479dedc8541
-
+//git테스트 진행중입니다
 var rScale
 var mW
 var mH
