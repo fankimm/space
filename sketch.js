@@ -33,7 +33,7 @@ var skipFrames
 
 function preload(){
   myFont = loadFont('assets/pixel.ttf')
-  //bg = loadSound('assets/bg.mp3')
+  bg = loadSound('assets/bg.mp3')
 
   logo = loadImage('assets/logo.png')
 
@@ -87,9 +87,9 @@ function setup() {
   textFont(myFont)
   textSize(30)
 
-  //bg.loop()
+  bg.loop()
 
-  //bg.play()
+  bg.play()
 
 }
 
