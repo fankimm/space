@@ -87,9 +87,9 @@ function setup() {
   textFont(myFont)
   textSize(30)
 
-  bg.loop()
+  //bg.loop()
 
-  bg.play()
+  //bg.play()
 
 }
 
