@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-var gittest
-var gittest2
-=======
->>>>>>> 0489b2761e02d795653d3be633806479dedc8541
-
+var whygitno
 var rScale
 var mW
 var mH
