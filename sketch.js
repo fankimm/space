@@ -26,14 +26,14 @@ var score
 var time
 
 
-let bg
+let bgm
 var logo
 
 var skipFrames
 
 function preload(){
   myFont = loadFont('assets/pixel.ttf')
-  bg = loadSound('assets/bg.mp3')
+  bgm = loadSound('assets/bgm.mp3')
 
   logo = loadImage('assets/logo.png')
 
@@ -87,16 +87,18 @@ function setup() {
   textFont(myFont)
   textSize(30)
 
-  bg.loop()
+  bgm.loop()
 
-  bg.play()
+  bgm.play()
 
 }
 
 
 
 function draw() {
-
+  if(!bgm.isPlaying()){
+    bgm.play()
+  }
   background(0)
 
   for (var i = 0; i < starAmount; i++){
@@ -265,8 +267,7 @@ class Soju extends Obj{
   }
 
   drinkSoju(a){
-    // console.log(this.pos.x + " , " + a.pos.x+this.img.width)
-    console.log(a.img.width)
+
     if((this.pos.x - a.pos.x - a.img.width*rScale)<=0){
       this.isDraw = false
       a.isDrink = true
