@@ -1,4 +1,4 @@
-var whygitno
+
 var rScale
 var mW
 var mH
@@ -33,7 +33,7 @@ var skipFrames
 
 function preload(){
   myFont = loadFont('assets/pixel.ttf')
-  bg = loadSound('assets/bg.mp3')
+  //bg = loadSound('assets/bg.mp3')
 
   logo = loadImage('assets/logo.png')
 
