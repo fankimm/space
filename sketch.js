@@ -1,4 +1,5 @@
 var gittest
+var gittest2
 
 var rScale
 var mW
