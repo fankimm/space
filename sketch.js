@@ -151,7 +151,7 @@ function Stars(){
     }
 
     this.color = color(this.random+(sin(frameCount/6))*60)
-    // console.log((sin(frameCount/6)+1)*60)
+    
 
     if(frameCount%skipFrames == 0){
 
@@ -213,7 +213,7 @@ class Stars{
     }
 
     this.color = color(this.random+(sin(frameCount/6))*60)
-    // console.log((sin(frameCount/6)+1)*60)
+
 
     if(frameCount%skipFrames == 0){
 
