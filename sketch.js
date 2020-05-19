@@ -276,3 +276,7 @@ class Soju extends Obj{
   }
 
 }
+
+function keyPressed(){
+  console.log(keyCode)
+}
