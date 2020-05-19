@@ -89,16 +89,12 @@ function setup() {
 
   bgm.loop()
 
-  bgm.play()
-
 }
 
 
 
 function draw() {
-  if(!bgm.isPlaying()){
-    bgm.play()
-  }
+
   background(0)
 
   for (var i = 0; i < starAmount; i++){
@@ -279,4 +275,11 @@ class Soju extends Obj{
 
 function keyPressed(){
   console.log(keyCode)
+  if(keyCode===83){
+    bgm.play()
+  }
+  else if(keyCode===80){
+    bgm.stop()
+    noLoop()
+  }
 }
