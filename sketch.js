@@ -127,7 +127,7 @@ function draw() {
 
   fill(255)
 
-  text('ALCOHOL     ' + score,120,30)
+  text('ALCOHOLooo     ' + score,120,30)
   text('TIME     ' + time,300,30)
 
   if(frameCount%30 == 0) {
@@ -151,7 +151,7 @@ function Stars(){
     }
 
     this.color = color(this.random+(sin(frameCount/6))*60)
-    
+
 
     if(frameCount%skipFrames == 0){
 
