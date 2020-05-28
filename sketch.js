@@ -2,6 +2,8 @@
 var rScale
 var mW
 var mH
+var wM
+var hM;
 
 var myFont
 
@@ -13,12 +15,13 @@ let earth
 let panty
 let gtr
 
+let backImg
 let shipImg
 let earthImg
 let sojuImg
 let pantyImg
 let gtrImg
-
+let heartImg
 
 let starAmount
 
@@ -32,16 +35,18 @@ var logo
 var skipFrames
 
 function preload(){
-  myFont = loadFont('assets/pixel.ttf')
+  myFont = loadFont('assets/ChiKareGo2.ttf')
   bgm = loadSound('assets/bgm.mp3')
 
   logo = loadImage('assets/logo.png')
 
+  backImg = loadImage('assets/back.png')
   shipImg = loadImage('assets/ship.png')
   earthImg = loadImage('assets/earth.png')
   sojuImg = loadImage('assets/soju.png')
   pantyImg = loadImage('assets/panty.png')
   gtrImg = loadImage('assets/gtr.png')
+  heartImg = loadImage('assets/heart.png')
 }
 
 
@@ -54,15 +59,16 @@ function setup() {
   score = 0
   time = 0
 
-  mW = 1200
-  mH = 800
-
-  ship = new Ship("soon2", 100, mH/2, 1, 0, shipImg, 0)
-  panty = new Obj("CK",mW + 50, mH/4, -3, 0, pantyImg, 2)
-  soju = new Soju("soju", mW + 50, mH/2, -1, 0, sojuImg, 7)
+  mW = 1664
+  mH = 690
+  wM = 13*3
+  hM = 78*3
+  ship = new Ship("soon2", 100, mH/2+hM, 1, 0, shipImg, 0)
+  panty = new Obj("CK",mW + 50+wM, mH/4+hM, -3, 0, pantyImg, 2)
+  soju = new Soju("soju", mW+wM + 50, mH/2+hM, -1, 0, sojuImg, 7)
   // soju = new Soju("soju", 300, mH/2, -1, 0, sojuImg, 0)
-  gtr = new Obj("SangMyeon",mW + 50, 600,-1,0,gtrImg,0)
-  earth = new Obj("EARTH", 100, mH/2, 0, 0, earthImg, 0)
+  gtr = new Obj("SangMyeon",mW + 50+wM, 600,-1,0,gtrImg,0)
+  earth = new Obj("EARTH", 100, mH/2+hM, 0, 0, earthImg, 0)
   for (var i = 0; i<starAmount; i++){
     stars[i] = new Stars()
   }
@@ -70,7 +76,7 @@ function setup() {
   rScale = 8
   // createCanvas(mW,mH)
 
-  let canvasElement = createCanvas(mW,mH).elt
+  let canvasElement = createCanvas(1920,1080).elt
   let context = canvasElement.getContext('2d')
   context.mozImageSmoothingEnabled = false
   context.webkitImageSmoothingEnabled = false
@@ -85,7 +91,7 @@ function setup() {
 
   textAlign(CENTER)
   textFont(myFont)
-  textSize(30)
+  textSize(60)
 
   bgm.loop()
 
@@ -118,13 +124,23 @@ function draw() {
   gtr.draw()
   gtr.update()
 
+  push()
+  imageMode(CORNER)
+  image(backImg,0,0)
 
+  for(var i=0;i<5;i++){
+    // tint(random(255),random(255),random(255),200)
+    image(heartImg,1400+i*50,245,heartImg.width*rScale,heartImg.height*rScale)
+  }
+
+
+  pop()
 
 
   fill(255)
-
-  text('ALCOHOLooo     ' + score,120,30)
-  text('TIME     ' + time,300,30)
+  textSize(50)
+  text('ALCOHO     ' + score,170+wM,50+hM)
+  text('TIME eee    ' + time,800+wM,50+hM)
 
   if(frameCount%30 == 0) {
     time++
@@ -143,7 +159,7 @@ function Stars(){
   this.color = color(0)
   this.update = function(){
     if(this.pos.x < 0){
-      this.pos = createVector(mW,random(mH))
+      this.pos = createVector(mW+wM,random(mH)+hM)
     }
 
     this.color = color(this.random+(sin(frameCount/6))*60)
@@ -197,31 +213,6 @@ class Obj{
   }
 
 }
-/*
-class Stars{
-  constructor (name, x, y, vX, vY, img, t){
-    this.random = random(120)
-    this.color = random(120)
-  }
-  update(){
-    if(this.pos.x < 0){
-      this.pos = createVector(mW,random(mH))
-    }
-
-    this.color = color(this.random+(sin(frameCount/6))*60)
-
-
-    if(frameCount%skipFrames == 0){
-
-      this.pos.x -= 3
-
-    }
-  }
-  draw(){
-    fill(this.color)
-    rect(this.pos.x, this.pos.y, rScale/2, rScale/2)
-  }
-}*/
 
 
 class Ship extends Obj{
