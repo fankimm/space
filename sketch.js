@@ -94,7 +94,7 @@ function setup() {
   textFont(myFont)
   textSize(60)
 
-  bgm.loop()
+  // bgm.loop()
 
 }
 
@@ -268,10 +268,10 @@ class Soju extends Obj{
 function keyPressed(){
   console.log(keyCode)
   if(keyCode===83){
-    bgm.play()
+    //bgm.play()
   }
   else if(keyCode===80){
-    bgm.stop()
+    // bgm.stop()
     noLoop()
   }
 }
