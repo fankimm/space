@@ -37,7 +37,7 @@ var skipFrames
 
 function preload(){
   myFont = loadFont('assets/ChiKareGo2.ttf')
-  bgm = loadSound('assets/bgm.mp3')
+  // bgm = loadSound('assets/bgm.mp3')
 
   logo = loadImage('assets/logo.png')
 
