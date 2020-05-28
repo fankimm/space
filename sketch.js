@@ -1,3 +1,4 @@
+var mobilewhynot?
 
 var rScale
 var mW
@@ -140,7 +141,7 @@ function draw() {
 
   fill(255)
   textSize(50)
-  text('ALCOHO    ' + score,170+wM,50+hM)
+  text('ALCOHOL    ' + score,170+wM,50+hM)
   text('TIME    ' + time,800+wM,50+hM)
 
   if(frameCount%30 == 0) {
