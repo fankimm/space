@@ -1,5 +1,3 @@
-var testVar;
-var whygit
 
 var rScale
 var mW
@@ -66,7 +64,7 @@ function setup() {
   mH = 690
   wM = 13*3
   hM = 78*3
-  ship = new Ship("soon2", 100, mH/2+hM, 1, 0, shipImg, 0)
+  ship = new Ship("suni", 100, mH/2+hM, 1, 0, shipImg, 0)
   panty = new Obj("CK",mW + 50+wM, mH/4+hM, -3, 0, pantyImg, 2)
   soju = new Soju("soju", mW+wM + 50, mH/2+hM, -1, 0, sojuImg, 7)
   // soju = new Soju("soju", 300, mH/2, -1, 0, sojuImg, 0)
@@ -142,8 +140,8 @@ function draw() {
 
   fill(255)
   textSize(50)
-  text('ALCOHO ooo    ' + score,170+wM,50+hM)
-  text('TIME eee    ' + time,800+wM,50+hM)
+  text('ALCOHO    ' + score,170+wM,50+hM)
+  text('TIME    ' + time,800+wM,50+hM)
 
   if(frameCount%30 == 0) {
     time++
