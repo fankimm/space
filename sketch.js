@@ -1,4 +1,3 @@
-var mobilewhynot?
 
 var rScale
 var mW
