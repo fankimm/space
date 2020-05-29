@@ -79,7 +79,7 @@ function setup() {
     stars[i] = new Stars()
   }
 
-  rScale = 8/d
+  rScale = 16/d
   // createCanvas(mW,mH)
 
   let canvasElement = createCanvas(fW/d,fH/d).elt
@@ -136,7 +136,7 @@ function draw() {
 
   for(var i=0;i<5;i++){
     // tint(random(255),random(255),random(255),200)
-    image(heartImg,fW/200*76+i*30,220,heartImg.width*rScale,heartImg.height*rScale)
+    image(heartImg,fW/200*76+i*30,fH/9,heartImg.width*rScale,heartImg.height*rScale)
   }
 
 
@@ -145,8 +145,8 @@ function draw() {
 
   fill(255)
   textSize(fW/d/45)
-  text('ALCOHOL    ' + score,170+wM,110+hM)
-  text('TIME    ' + time,800+wM,110+hM)
+  text('ALCOHOL    ' + score,170+wM,fH/8)
+  text('TIME    ' + time,400+wM,fH/8)
 
   if(frameCount%30 == 0) {
     time++
