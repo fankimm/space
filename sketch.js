@@ -60,10 +60,10 @@ function setup() {
   score = 0
   time = 0
 
-  mW = 1664
-  mH = 690
-  wM = 13*3
-  hM = 78*3
+  mW = 1664/3
+  mH = 690/3
+  wM = 13*3/3
+  hM = 78*3/3
   ship = new Ship("suni", 100, mH/2+hM, 1, 0, shipImg, 0)
   panty = new Obj("CK",mW + 50+wM, mH/4+hM, -3, 0, pantyImg, 2)
   soju = new Soju("soju", mW+wM + 50, mH/2+hM, -1, 0, sojuImg, 7)
@@ -77,7 +77,7 @@ function setup() {
   rScale = 8
   // createCanvas(mW,mH)
 
-  let canvasElement = createCanvas(1920,1080).elt
+  let canvasElement = createCanvas(1920/3,1080/3).elt
   let context = canvasElement.getContext('2d')
   context.mozImageSmoothingEnabled = false
   context.webkitImageSmoothingEnabled = false
