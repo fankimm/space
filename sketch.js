@@ -2,6 +2,8 @@ var d
 var rScale
 var mW
 var mH
+var fW;
+var fH;
 
 var wM
 var hM;
@@ -60,10 +62,13 @@ function setup() {
   score = 0
   time = 0
 
+  fH = screen.height*d
+  fW = fH/9*16
+
   mW = 1664/d
   mH = 690/d
-  wM = 13*3/d
-  hM = 78*3/d
+  wM = 13*d
+  hM = 78*d
   ship = new Ship("suni", 100, mH/2+hM, 1, 0, shipImg, 0)
   panty = new Obj("CK",mW + 50+wM, mH/4+hM, -3, 0, pantyImg, 2)
   soju = new Soju("soju", mW+wM + 50, mH/2+hM, -1, 0, sojuImg, 7)
@@ -77,7 +82,7 @@ function setup() {
   rScale = 8/d
   // createCanvas(mW,mH)
 
-  let canvasElement = createCanvas(1920/d,1080/d).elt
+  let canvasElement = createCanvas(fW/d,fH/d).elt
   let context = canvasElement.getContext('2d')
   context.mozImageSmoothingEnabled = false
   context.webkitImageSmoothingEnabled = false
@@ -127,11 +132,11 @@ function draw() {
 
   push()
   imageMode(CORNER)
-  image(backImg,0,0,backImg.width/d,backImg.height/d)
+  image(backImg,0,0,fW/d,fH/d)
 
   for(var i=0;i<5;i++){
     // tint(random(255),random(255),random(255),200)
-    image(heartImg,1400+i*50,245,heartImg.width*rScale/d,heartImg.height*rScale/d)
+    image(heartImg,fW/200*76+i*30,220,heartImg.width*rScale,heartImg.height*rScale)
   }
 
 
@@ -139,9 +144,9 @@ function draw() {
 
 
   fill(255)
-  textSize(50)
-  text('ALCOHOL    ' + score,170+wM,50+hM)
-  text('TIME    ' + time,800+wM,50+hM)
+  textSize(fW/d/45)
+  text('ALCOHOL    ' + score,170+wM,110+hM)
+  text('TIME    ' + time,800+wM,110+hM)
 
   if(frameCount%30 == 0) {
     time++
