@@ -136,7 +136,7 @@ function draw() {
 
   for(var i=0;i<5;i++){
     // tint(random(255),random(255),random(255),200)
-    image(heartImg,fW/200*76+i*30,fH/9/d,heartImg.width*rScale,heartImg.height*rScale)
+    image(heartImg,500+i*30,fH/9/d,heartImg.width*rScale,heartImg.height*rScale)
   }
 
 
