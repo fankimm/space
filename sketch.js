@@ -74,7 +74,7 @@ function setup() {
     stars[i] = new Stars()
   }
 
-  rScale = 8
+  rScale = 8/d
   // createCanvas(mW,mH)
 
   let canvasElement = createCanvas(1920/d,1080/d).elt
@@ -127,11 +127,11 @@ function draw() {
 
   push()
   imageMode(CORNER)
-  image(backImg,0,0)
+  image(backImg,0,0,backImg.width/d,backImg.height/d)
 
   for(var i=0;i<5;i++){
     // tint(random(255),random(255),random(255),200)
-    image(heartImg,1400+i*50,245,heartImg.width*rScale,heartImg.height*rScale)
+    image(heartImg,1400+i*50,245,heartImg.width*rScale/d,heartImg.height*rScale/d)
   }
 
 
