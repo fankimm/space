@@ -7,6 +7,7 @@ function Ship(name, x, y, vX, vY, img, t){
   this.vel = createVector(vX,vY)
   this.cT = t
   this.img = img
+  this.hp = 5
   this.update = function(){
     if(time>this.cT){
       this.vel.y = sin(frameCount/10)
@@ -27,6 +28,7 @@ function Ship(name, x, y, vX, vY, img, t){
       } else if (this.isDrink){
         push()
       // translate(this.pos.x + this.img.width*rScale/2,this.pos.y + this.img.height*rScale/2)
+        this.hp=5
         translate(this.pos.x,this.pos.y)
         rotate(frameCount/10)
         tint(random(255),random(255),random(255),200)

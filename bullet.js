@@ -1,7 +1,7 @@
 function Bullet(a,b,c){
   this.pos = createVector(a.pos.x,a.pos.y)
   this.vel = createVector(0,0)
-  this.ammo = 20
+  this.ammo = 5
   this.speed = 50
   this.index = 0
   this.boomPos = createVector(0,0)
@@ -23,12 +23,14 @@ function Bullet(a,b,c){
 
           if(this.ammo>0){
 
-            if(abs(b.pos.x-this.pos.x)<10){
+            if((this.pos.x - b.pos.x)<10){
+              console.log(this.ammo)
               this.index=0
               this.boomPos.x = this.pos.x
               this.boomPos.y = this.pos.y
 
               this.ammo--
+              ship.hp-=0.2
               this.pos.x= a.pos.x
               this.pos.y= a.pos.y
 
@@ -36,7 +38,9 @@ function Bullet(a,b,c){
             push()
             if(this.isShip){
               tint(random(255),random(255),random(255),200)
-            } else tint(255,0,0)
+            } else {
+              tint(255,0,0)
+            }
             image(bulletImg,this.pos.x,this.pos.y,bulletImg.width*rScale/2,bulletImg.height*rScale/2)
             pop()
           } else if(this.ammo<=0){

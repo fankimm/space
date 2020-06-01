@@ -6,6 +6,7 @@ var mH
 var wM
 var hM;
 var instrumentMargin
+var hp
 
 var myFont
 
@@ -82,6 +83,8 @@ function setup() {
   starAmount = 100
   score = 0
   time = 0
+
+  hp = 5
 
   mW = 1664
   mH = 690
@@ -179,7 +182,7 @@ function draw() {
     bass.update()
     keyboard.draw()
     keyboard.update()
-
+    /*
     bullet.update()
     bullet.draw()
     bullet.drawBoom()
@@ -199,7 +202,7 @@ function draw() {
     bullet4.update()
     bullet4.draw()
     bullet4.drawBoom()
-
+    */
     bulletToShip.update()
     bulletToShip.draw()
     bulletToShip.drawBoom()
@@ -228,7 +231,7 @@ function draw() {
     imageMode(CORNER)
     image(backImg,0,0,backImg.width*3,backImg.height*3)
 
-    for(var i=0;i<5;i++){
+    for(var i=0;i<ship.hp;i++){
       // tint(random(255),random(255),random(255),200)
       image(heartImg,1400+i*50,245,heartImg.width*rScale,heartImg.height*rScale)
     }
