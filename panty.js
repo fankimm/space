@@ -1,4 +1,4 @@
-function panty(name, x, y, vX, vY, img, t){
+function Panty(name, x, y, vX, vY, img, t){
   this.isDraw = true
   this.name = name
   this.pos = createVector(x,y)
