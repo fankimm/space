@@ -125,7 +125,7 @@ function setup() {
   rScale = 8
   // createCanvas(mW,mH)
 
-  let canvasElement = createCanvas(1920,1080).elt
+  let canvasElement = createCanvas(screen.width,screen.height).elt
   let context = canvasElement.getContext('2d')
   context.mozImageSmoothingEnabled = false
   context.webkitImageSmoothingEnabled = false
