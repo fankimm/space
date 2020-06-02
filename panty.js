@@ -1,4 +1,4 @@
-function Earth(name, x, y, vX, vY, img, t){
+function panty(name, x, y, vX, vY, img, t){
   this.isDraw = true
   this.name = name
   this.pos = createVector(x,y)
@@ -6,14 +6,17 @@ function Earth(name, x, y, vX, vY, img, t){
   this.cT = t
   this.img = img
   this.update = function(){
-    
+
       if(time>this.cT){
-        // this.vel.y = sin(frameCount/10)
+        this.vel.y = sin(frameCount/15)
         this.pos.x += this.vel.x
         this.pos.y -= this.vel.y
+
       }
-      if(this.pos.x < - 100){
-        this.isDraw = false
+
+
+      if(time == 60) {
+        this.vel.x = -3
       }
 
 
@@ -29,10 +32,6 @@ function Earth(name, x, y, vX, vY, img, t){
       text(this.name, this.pos.x,this.pos.y+this.img.height/2*rScale+rScale*2 + fontSize)
     }
   }
-  this.move = function(a){
-    if(a.isCentered){
-      // console.log(a.isCentered)
-      this.vel.x = -1
-    }
-  }
+
+
 }

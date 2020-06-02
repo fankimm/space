@@ -9,7 +9,7 @@ var instrumentMargin
 var hp
 
 var myFont
-
+var fontSize
 
 var stars = []
 
@@ -77,6 +77,7 @@ function preload(){
 
 function setup() {
 
+  fontSize = 30
   instrumentMargin = 20
   isGameStart = false
   skipFrames = 3
@@ -90,30 +91,33 @@ function setup() {
   mH = 690
   wM = 13*3
   hM = 78*3
-  ship = new Ship("SUNI", 100, mH/2+hM, 5, 0, shipImg, 0)
-  panty = new Obj("CK",mW + 50+wM, mH/4+hM, -3, 0, pantyImg, 2)
-  soju = new Soju("SOJU", mW+wM + 50, mH/2+hM, -1, 0, sojuImg, 7)
+  ship = new Ship("SUNI", 100, mH/2+hM, 2, 0, shipImg, 0)
+  panty = new Panty("CK",mW + 50+wM, mH/4+hM, -4, 0, pantyImg, 50)
+  soju = new Soju("SOJU", mW+wM + 50, mH/2+hM, -2, 0, sojuImg, 35)
   // soju = new Soju("soju", 300, mH/2, -1, 0, sojuImg, 0)
-  gtr = new Obj("GTR",200+mW + 50+wM, 300+instrumentMargin,-1,0,gtrImg,0)
-  bass = new Obj("BAS",100+mW + 50+wM, 415+instrumentMargin,-1,0,bassImg,0)
-  vocal = new Obj("VOX",mW + 50+wM, 540+instrumentMargin,-1,0,vocalImg,0)
-  keyboard = new Obj("KBD",100+mW + 50+wM, 650+instrumentMargin,-1,0,keyboardImg,0)
-  drum = new Obj("DR",200+mW + 50+wM, 750+instrumentMargin,-1,0,drumImg,0)
+  gtr = new Obj("GTR",200+mW + 50+wM, 300+instrumentMargin,-2,0,gtrImg,14)
+  bass = new Obj("BAS",100+mW + 50+wM, 415+instrumentMargin,-2,0,bassImg,14)
+  vocal = new Obj("VOX",mW + 50+wM, 540+instrumentMargin,-2,0,vocalImg,14)
+  keyboard = new Obj("KBD",100+mW + 50+wM, 650+instrumentMargin,-2,0,keyboardImg,14)
+  drum = new Obj("DR",200+mW + 50+wM, 750+instrumentMargin,-2,0,drumImg,14)
 
   earth = new Earth("EARTH", 100, mH/2+hM, 0, 0, earthImg, 0)
 
-  bulletToShip = new Bullet(gtr,ship,false)
-  bulletToShip1 = new Bullet(bass,ship,false)
-  bulletToShip2 = new Bullet(vocal,ship,false)
-  bulletToShip3 = new Bullet(drum,ship,false)
-  bulletToShip4 = new Bullet(keyboard,ship,false)
+  bulletToShip = new BulletToShip(gtr)
+  bulletToShip1 = new BulletToShip(bass)
+  bulletToShip2 = new BulletToShip(vocal)
+  bulletToShip3 = new BulletToShip(drum)
+  bulletToShip4 = new BulletToShip(keyboard)
 
 
-  bullet = new Bullet(ship,gtr,true)
-  bullet1 = new Bullet(ship,bass,true)
-  bullet2 = new Bullet(ship,drum,true)
-  bullet3 = new Bullet(ship,vocal,true)
-  bullet4 = new Bullet(ship,keyboard,true)
+  bulletToMember = new BulletToMember(gtr)
+  bulletToMember1 = new BulletToMember(bass)
+  bulletToMember2 = new BulletToMember(vocal)
+  bulletToMember3 = new BulletToMember(keyboard)
+  bulletToMember4 = new BulletToMember(drum)
+
+
+
   for (var i = 0; i<starAmount; i++){
     stars[i] = new Stars()
   }
@@ -151,6 +155,7 @@ function draw() {
     image(backImg0,0,0,backImg0.width*3,backImg0.height*3)
     pop()
   } else if(isGameStart){
+
     background(0)
 
     for (var i = 0; i < starAmount; i++){
@@ -182,27 +187,27 @@ function draw() {
     bass.update()
     keyboard.draw()
     keyboard.update()
-    /*
-    bullet.update()
-    bullet.draw()
-    bullet.drawBoom()
 
-    bullet1.update()
-    bullet1.draw()
-    bullet1.drawBoom()
+    bulletToMember.update()
+    bulletToMember.draw()
+    bulletToMember.drawBoom()
 
-    bullet2.update()
-    bullet2.draw()
-    bullet2.drawBoom()
+    bulletToMember1.update()
+    bulletToMember1.draw()
+    bulletToMember1.drawBoom()
 
-    bullet3.update()
-    bullet3.draw()
-    bullet3.drawBoom()
+    bulletToMember2.update()
+    bulletToMember2.draw()
+    bulletToMember2.drawBoom()
 
-    bullet4.update()
-    bullet4.draw()
-    bullet4.drawBoom()
-    */
+    bulletToMember3.update()
+    bulletToMember3.draw()
+    bulletToMember3.drawBoom()
+
+    bulletToMember4.update()
+    bulletToMember4.draw()
+    bulletToMember4.drawBoom()
+
     bulletToShip.update()
     bulletToShip.draw()
     bulletToShip.drawBoom()
@@ -232,8 +237,11 @@ function draw() {
     image(backImg,0,0,backImg.width*3,backImg.height*3)
 
     for(var i=0;i<ship.hp;i++){
-      // tint(random(255),random(255),random(255),200)
       image(heartImg,1400+i*50,245,heartImg.width*rScale,heartImg.height*rScale)
+      if(ship.isDrink){
+        tint(random(255),random(255),random(255),200)
+        image(heartImg,1400+i*50,245,heartImg.width*rScale,heartImg.height*rScale)
+      }
     }
 
 

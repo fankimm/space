@@ -10,21 +10,24 @@ function Ship(name, x, y, vX, vY, img, t){
   this.hp = 5
   this.update = function(){
     if(time>this.cT){
-      this.vel.y = sin(frameCount/10)
-      this.pos.x += this.vel.x
-      this.pos.y -= this.vel.y
 
+        this.vel.y = sin(frameCount/10)
+        this.pos.x += this.vel.x
+        this.pos.y -= this.vel.y
+      
     }
   }
+
+
   this.draw = function(){
     if(this.isDraw){
       if(!this.isDrink){
         image(this.img, this.pos.x, this.pos.y,this.img.width*rScale,this.img.height*rScale)
 
-        textSize(20)
+        textSize(fontSize)
         fill(255)
 
-        text(this.name, this.pos.x,this.pos.y+this.img.height/2*rScale+rScale*2)
+        text(this.name, this.pos.x,this.pos.y+this.img.height/2*rScale+rScale*2 + fontSize)
       } else if (this.isDrink){
         push()
       // translate(this.pos.x + this.img.width*rScale/2,this.pos.y + this.img.height*rScale/2)
@@ -33,9 +36,9 @@ function Ship(name, x, y, vX, vY, img, t){
         rotate(frameCount/10)
         tint(random(255),random(255),random(255),200)
         image(this.img,0,0,this.img.width*rScale,this.img.height*rScale)
-        textSize(20)
+        textSize(fontSize)
         fill(255)
-        text(this.name, 0,this.img.height*rScale/2 + rScale*2)
+        text(this.name, 0,this.img.height*rScale/2 + rScale*2 + fontSize)
 
         pop()
       }
