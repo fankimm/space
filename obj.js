@@ -8,6 +8,9 @@ class Obj{
     this.cT = t
     this.img = img
     this.velYAmount = random(7,10)
+    this.hp = 10
+    this.once = true
+    this.index = 0
   }
 
   update (){
@@ -18,18 +21,38 @@ class Obj{
         this.pos.y -= this.vel.y
       }
 
-      if(time == 47){
+      if(time == 51){
         this.isDraw = false
         this.vel.x = this.newVel
 
       }
 
-      if(time == 55){
+      if(time == 63){
 
         this.isDraw = true
       }
 
-      if(time == 65){
+      if(this.hp == 0){
+        if(this.index>6 && time < 80) this.index = 0
+        push()
+        tint(random(255),random(255),random(255))
+        image(boomSpriteImg,this.pos.x,this.pos.y,30,30,this.index*5,0,5,5)
+        pop()
+
+        if(frameCount%2){
+            this.index +=1
+        }
+
+
+        if(this.once){
+            this.tempTime = time
+            this.once = false
+
+
+
+
+        }
+
         this.vel.x = 0
       }
 
@@ -45,7 +68,35 @@ class Obj{
       fill(255)
 
       text(this.name, this.pos.x,this.pos.y+this.img.height/2*rScale+rScale*2 + fontSize)
+      if(this.tempTime >= time-2){
 
+                image(smiImg,this.pos.x + 16,this.pos.y -72,smiImg.width*rScale,smiImg.height*rScale)
+                push()
+                fill(0)
+                textSize(fontSize)
+                switch(this.name){
+                  case 'GTR':
+                    text("!@#$",this.pos.x + 16,this.pos.y - 72)
+                    break;
+                  case 'VOX':
+                    text("AK",this.pos.x + 16,this.pos.y - 72)
+                    break;
+                  case 'DR':
+                    text("OMG!",this.pos.x + 16,this.pos.y - 72)
+                    break;
+                  case 'BAS':
+                    text("UK!",this.pos.x + 16,this.pos.y - 72)
+                    break;
+                  case 'KBD':
+                    text("D**N",this.pos.x + 16,this.pos.y - 72)
+                    break;
+                }
+
+                pop()
+      } else if(this.tempTime < time -2){
+        this.isDraw = false
+
+      }
     }
   }
 

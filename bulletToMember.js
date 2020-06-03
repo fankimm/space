@@ -5,7 +5,7 @@ function BulletToMember(member){
   this.speed = 1
   this.index = 0
   this.boomPos = createVector(0,0)
-  this.cT = 56
+  this.cT = 68
   this.isDraw = false
   this.once = true
 
@@ -57,7 +57,7 @@ function BulletToMember(member){
               this.boomPos.y = this.pos.y
 
               this.ammo--
-
+              member.hp --
               this.pos.x= ship.pos.x
               this.pos.y= ship.pos.y
             }

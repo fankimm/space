@@ -8,13 +8,26 @@ function Ship(name, x, y, vX, vY, img, t){
   this.cT = t
   this.img = img
   this.hp = 5
+  this.index = 0
   this.update = function(){
+    if(frameCount % 2 ==0 ) {
+      this.index+=1
+    }
+    if(this.hp<=0){
+      if(this.index >7){
+        this.index = 0
+      }
+      image(boomSpriteImg,this.pos.x,this.pos.y-32,40,40,this.index*5,0,5,5)
+      image(boomSpriteImg,this.pos.x-32,this.pos.y,40,40,this.index*5,0,5,5)
+      image(boomSpriteImg,this.pos.x+32,this.pos.y+32,40,40,this.index*5,0,5,5)
+    }
+
     if(time>this.cT){
 
         this.vel.y = sin(frameCount/10)
         this.pos.x += this.vel.x
         this.pos.y -= this.vel.y
-      
+
     }
   }
 

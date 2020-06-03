@@ -22,6 +22,6 @@ function Stars(){
     // this.pos = createVector(random(mW),random(mH))
 
     fill(this.color)
-    rect(this.pos.x, this.pos.y,rScale/2,rScale/2)
+    rect(this.pos.x, this.pos.y,rScale/4*3,rScale/4*3)
   }
 }
